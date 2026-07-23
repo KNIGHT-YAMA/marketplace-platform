@@ -6,8 +6,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from 'public' folder
+// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Mock database (stores users while server is running)
+let users = [];
 
 // Package Definitions
 const packages = [
@@ -34,27 +37,36 @@ const packages = [
   }
 ];
 
-// API Endpoint to register user
+// Register User
 app.post('/api/register', (req, res) => {
   const { fullName, email, phone } = req.body;
   if (!fullName || !email || !phone) {
     return res.status(400).json({ error: "Please fill in all fields" });
   }
 
-  res.json({ 
-    message: "Registration successful!", 
-    user: { fullName, email, phone, balance: 0.00 } 
-  });
+  const newUser = { id: Date.now(), fullName, email, phone, balance: 0.00 };
+  users.push(newUser);
+  res.json({ message: "Registration successful!", user: newUser });
 });
 
-// API Endpoint to fetch packages
+// Get Packages
 app.get('/api/packages', (req, res) => {
   res.json(packages);
 });
 
-// Serve index.html on root route
+// ADMIN: Get all registered clients
+app.get('/api/admin/users', (req, res) => {
+  res.json(users);
+});
+
+// Serve main app
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Serve admin dashboard
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 const PORT = process.env.PORT || 5000;

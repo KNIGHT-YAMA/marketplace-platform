@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #2c3e50; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .container { width: 100%; max-width: 700px; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background: #34495e; color: white; }
+    .hidden { display: none; }
+    input { padding: 8px; width: 80%; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #e74c3c; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+    button:hover { background: #c0392b; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- ADMIN LOGIN -->
+    <div id="login-section">
+      <h2>Admin Login</h2>
+      <p>Enter Admin Key to manage registered clients:</p>
+      <input type="password" id="adminPass" placeholder="Enter Admin Password (admin123)">
+      <button onclick="loginAdmin()">Login</button>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="dashboard-section" class="hidden">
+      <h2>Admin Control Panel</h2>
+      <h3>Registered Clients</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody id="userTable">
+          <tr><td colspan="4">Loading clients...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function loginAdmin() {
+      const pass = document.getElementById('adminPass').value;
+      if (pass === 'admin123') { // Simple secret key
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('dashboard-section').classList.remove('hidden');
+        fetchUsers();
+      } else {
+        alert('Incorrect Admin Password!');
+      }
+    }
+
+    async function fetchUsers() {
+      const res = await fetch('/api/admin/users');
+      const users = await res.json();
+      const table = document.getElementById('userTable');
+      table.innerHTML = '';
+
+      if (users.length === 0) {
+        table.innerHTML = '<tr><td colspan="4">No registered clients yet.</td></tr>';
+        return;
+      }
+
+      users.forEach(u => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${u.fullName}</td>
+          <td>${u.email}</td>
+          <td>${u.phone}</td>
+          <td>KES ${u.balance.toFixed(2)}</td>
+        `;
+        table.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>
