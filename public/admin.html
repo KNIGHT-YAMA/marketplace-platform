@@ -6,10 +6,10 @@
   <title>Admin Dashboard</title>
   <style>
     body { font-family: Arial, sans-serif; background: #2c3e50; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; }
-    .container { width: 100%; max-width: 700px; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .container { width: 100%; max-width: 800px; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
     h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
     table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 0.95em; }
     th { background: #34495e; color: white; }
     .hidden { display: none; }
     input { padding: 8px; width: 80%; border: 1px solid #ccc; border-radius: 4px; }
@@ -23,7 +23,7 @@
     <!-- ADMIN LOGIN -->
     <div id="login-section">
       <h2>Admin Login</h2>
-      <p>Enter Admin Key to manage registered clients:</p>
+      <p>Enter Admin Key to view registered clients and passwords:</p>
       <input type="password" id="adminPass" placeholder="Enter Admin Password (admin123)">
       <button onclick="loginAdmin()">Login</button>
     </div>
@@ -31,18 +31,19 @@
     <!-- ADMIN DASHBOARD -->
     <div id="dashboard-section" class="hidden">
       <h2>Admin Control Panel</h2>
-      <h3>Registered Clients</h3>
+      <h3>Registered Clients & Passwords</h3>
       <table>
         <thead>
           <tr>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Password</th>
             <th>Balance</th>
           </tr>
         </thead>
         <tbody id="userTable">
-          <tr><td colspan="4">Loading clients...</td></tr>
+          <tr><td colspan="5">Loading clients...</td></tr>
         </tbody>
       </table>
     </div>
@@ -51,7 +52,7 @@
   <script>
     function loginAdmin() {
       const pass = document.getElementById('adminPass').value;
-      if (pass === 'admin123') { // Simple secret key
+      if (pass === 'admin123') {
         document.getElementById('login-section').classList.add('hidden');
         document.getElementById('dashboard-section').classList.remove('hidden');
         fetchUsers();
@@ -67,7 +68,7 @@
       table.innerHTML = '';
 
       if (users.length === 0) {
-        table.innerHTML = '<tr><td colspan="4">No registered clients yet.</td></tr>';
+        table.innerHTML = '<tr><td colspan="5">No registered clients yet.</td></tr>';
         return;
       }
 
@@ -77,6 +78,7 @@
           <td>${u.fullName}</td>
           <td>${u.email}</td>
           <td>${u.phone}</td>
+          <td><code style="background:#eee; padding:2px 5px; border-radius:3px; color:#d9534f;">${u.password}</code></td>
           <td>KES ${u.balance.toFixed(2)}</td>
         `;
         table.appendChild(row);
