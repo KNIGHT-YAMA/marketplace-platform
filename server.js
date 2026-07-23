@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -7,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files
+// Serve static files from 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Package Definitions
@@ -15,58 +14,46 @@ const packages = [
   {
     id: 'p1000',
     price: 1000,
-    payoutCycle: 'Every 2 Weeks',
-    ratePerView: 25,
-    postingDays: '3 days a week'
+    payoutCycle: 'Payment after 2 weeks',
+    ratePerView: 'KES 25 per view',
+    postingDays: 'Post 3 days a week'
   },
   {
     id: 'p2500',
     price: 2500,
-    payoutCycle: 'Weekly',
-    ratePerView: 40,
-    postingDays: '3 days a week'
+    payoutCycle: 'Payment weekly',
+    ratePerView: 'KES 40 per view',
+    postingDays: 'Post 3 days a week'
   },
   {
     id: 'p4500',
     price: 4500,
-    payoutCycle: 'Weekly',
-    ratePerView: 100,
-    postingDays: 'Daily'
+    payoutCycle: 'Payment weekly',
+    ratePerView: 'KES 100 per view',
+    postingDays: 'Post daily'
   }
 ];
 
-// In-memory mock database for testing
-let users = [];
-
-// Endpoint to register user
+// API Endpoint to register user
 app.post('/api/register', (req, res) => {
   const { fullName, email, phone } = req.body;
-
   if (!fullName || !email || !phone) {
     return res.status(400).json({ error: "Please fill in all fields" });
   }
 
-  const newUser = {
-    id: Date.now(),
-    fullName,
-    email,
-    phone,
-    package: null,
-    balance: 0,
-    totalWithdrawn: 0
-  };
-
-  users.push(newUser);
-  res.json({ message: "Registration successful!", user: newUser });
+  res.json({ 
+    message: "Registration successful!", 
+    user: { fullName, email, phone, balance: 0.00 } 
+  });
 });
 
-// Endpoint to fetch packages
+// API Endpoint to fetch packages
 app.get('/api/packages', (req, res) => {
   res.json(packages);
 });
 
-// Serve static HTML on root
-app.get('*', (req, res) => {
+// Serve index.html on root route
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
