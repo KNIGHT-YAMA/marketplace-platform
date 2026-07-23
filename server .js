@@ -1,17 +1,5 @@
+
 const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const axios = require('axios');
-require('dotenv').config();
-
-const app = express();
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('Marketplace Backend is Live!');
-});
-
-app.listen(process.env.PORT || 5000, () => console.log('Server active on port 5000'));const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
@@ -22,14 +10,14 @@ app.use(express.json());
 // 1. Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 2. Serve index.html on the home route
+// 2. Serve index.html on root route
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Optional: A separate API endpoint for testing
+// 3. API Test Endpoint
 app.get('/api/status', (req, res) => {
-  res.json({ message: "Marketplace Backend is Live!" });
+  res.json({ message: "API is working properly!" });
 });
 
 const PORT = process.env.PORT || 5000;
