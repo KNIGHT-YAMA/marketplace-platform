@@ -1,193 +1,258 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marketplace Platform & Affiliate Earning</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f9; margin: 0; padding: 20px; display: flex; justify-content: center; }
-    .container { width: 100%; max-width: 480px; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h2 { text-align: center; color: #333; margin-top: 0; }
-    .form-group { margin-bottom: 15px; }
-    label { font-weight: bold; display: block; margin-bottom: 5px; color: #444; }
-    input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-    button { width: 100%; background: #007bff; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    button:hover { background: #0056b3; }
-    .hidden { display: none; }
-    .package-card { border: 2px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; background: #fafafa; }
-    .balance-card { background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    .balance-amount { font-size: 2.2em; font-weight: bold; margin-top: 5px; }
-    
-    /* Graphics & Banner Styles */
-    .hero-graphic { width: 100%; height: 160px; background: url('https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=600&q=80') center/cover; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; text-shadow: 0 2px 4px rgba(0,0,0,0.7); font-size: 1.5em; font-weight: bold; text-align: center; padding: 10px; box-sizing: border-box; }
-    .promo-banner { background: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 12px; border-radius: 6px; font-size: 0.95em; margin-bottom: 20px; text-align: center; line-height: 1.4; }
-    .tab-switch { text-align: center; margin-top: 15px; font-size: 0.9em; color: #666; }
-    .tab-switch span { color: #007bff; cursor: pointer; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knight Financial Marketplace | Elite Tech & Luxury Accessories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        knight: {
+                            50: '#f4f6f8', 100: '#e1e7ed', 200: '#c5d2dc', 300: '#9cb1c2', 400: '#718da3',
+                            500: '#537188', 600: '#3e586d', 700: '#324859', 800: '#23323d', 900: '#141d24',
+                            950: '#0a0f12', gold: '#d4af37', 'gold-light': '#f3e5ab', 'gold-dark': '#aa8c2c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-knight-950 text-slate-100 min-h-screen selection:bg-knight-gold selection:text-knight-950">
 
-  <div class="container">
-    
-    <!-- 1. REGISTRATION AREA -->
-    <div id="registration-section">
-      <h2>Create Account</h2>
-      <div class="hero-graphic">Earn Daily & Build Wealth!</div>
-      <form onsubmit="handleRegister(event)">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="regName" placeholder="Enter Full Name" required>
+    <!-- STEP 1: REGISTRATION VIEW -->
+    <div id="view-register" class="min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-md w-full bg-knight-900/80 border border-knight-800 rounded-3xl p-8 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+            <div class="text-center space-y-3 mb-8">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-knight-gold via-knight-gold-dark to-amber-600 flex items-center justify-center shadow-lg shadow-knight-gold/20 text-knight-950 text-3xl font-extrabold">♞</div>
+                <h1 class="text-2xl font-extrabold text-white tracking-wide">KNIGHT FINANCIAL</h1>
+                <p class="text-xs uppercase tracking-[0.25em] text-knight-gold font-semibold">Secure Account Registration</p>
+            </div>
+            <form onsubmit="handleRegistration(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Full Name / Entity</label>
+                    <input type="text" id="reg-name" required placeholder="e.g. Alexander Vance" class="w-full bg-knight-950 border border-knight-800 rounded-xl px-4 py-3 text-slate-200 outline-none text-sm focus:border-knight-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Email Address</label>
+                    <input type="email" id="reg-email" required placeholder="alexander@knightfinancial.co.ke" class="w-full bg-knight-950 border border-knight-800 rounded-xl px-4 py-3 text-slate-200 outline-none text-sm focus:border-knight-gold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Secure Password</label>
+                    <input type="password" id="reg-password" required placeholder="••••••••••••" class="w-full bg-knight-950 border border-knight-800 rounded-xl px-4 py-3 text-slate-200 outline-none text-sm focus:border-knight-gold">
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-knight-gold to-amber-600 text-knight-950 font-bold py-3.5 rounded-xl shadow-lg hover:opacity-95 transition mt-2">Create Account & Continue</button>
+            </form>
         </div>
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="regEmail" placeholder="Enter Email" required>
-        </div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" id="regPhone" placeholder="Enter Phone Number" required>
-        </div>
-        <div class="form-group">
-          <label>Secret Password (For Future Logins)</label>
-          <input type="password" id="regPass" placeholder="Create a password" required>
-        </div>
-        <button type="submit" style="background:#28a745;">Register Now</button>
-      </form>
-      <div class="tab-switch">
-        Already have an account? <span onclick="showLogin()">Login here</span>
-      </div>
     </div>
 
-    <!-- 2. LOGIN AREA (For returning users) -->
-    <div id="login-section" class="hidden">
-      <h2>Client Login</h2>
-      <div class="hero-graphic" style="background-image: url('https://images.unsplash.com/photo-1553729459-efe14ef6055d?auto=format&fit=crop&w=600&q=80');">Welcome Back!</div>
-      <form onsubmit="handleLogin(event)">
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="loginEmail" placeholder="Enter your email" required>
+    <!-- STEP 2: ONBOARDING / VIP WELCOME SCREEN (The second thing they see) -->
+    <div id="view-onboarding" class="hidden min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-2xl w-full bg-knight-900/90 border border-knight-gold/30 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-2xl relative space-y-8">
+            <div class="text-center space-y-3">
+                <span class="px-3 py-1 rounded-full bg-knight-gold/10 border border-knight-gold/30 text-knight-gold text-xs font-bold uppercase tracking-widest">Step 2 of 2 • Welcome to Elite Access</span>
+                <h2 class="text-3xl font-extrabold text-white">Welcome, <span id="welcome-username" class="text-knight-gold">Valued Client</span></h2>
+                <p class="text-slate-400 text-sm max-w-lg mx-auto">Before you enter the catalog and acquire packages, select your designated membership tier for KSH pricing and white-glove logistics.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div onclick="selectTier('Executive')" class="tier-card cursor-pointer bg-knight-950 border border-knight-800 hover:border-knight-gold p-6 rounded-2xl text-center space-y-3 transition">
+                    <div class="text-3xl">🛡️</div>
+                    <h4 class="font-bold text-white text-sm">Executive</h4>
+                    <p class="text-xs text-slate-400">Standard KSH access & delivery.</p>
+                </div>
+                <div onclick="selectTier('Black Diamond VIP')" class="tier-card cursor-pointer bg-knight-950 border-2 border-knight-gold p-6 rounded-2xl text-center space-y-3 transition shadow-lg shadow-knight-gold/10">
+                    <div class="text-3xl">♞</div>
+                    <h4 class="font-bold text-white text-sm">Black Diamond</h4>
+                    <p class="text-xs text-slate-400">Priority allocation & concierge.</p>
+                </div>
+                <div onclick="selectTier('Sovereign')" class="tier-card cursor-pointer bg-knight-950 border border-knight-800 hover:border-knight-gold p-6 rounded-2xl text-center space-y-3 transition">
+                    <div class="text-3xl">👑</div>
+                    <h4 class="font-bold text-white text-sm">Sovereign</h4>
+                    <p class="text-xs text-slate-400">Custom bespoke tech builds.</p>
+                </div>
+            </div>
+            <button onclick="completeOnboarding()" class="w-full bg-gradient-to-r from-knight-gold to-amber-600 text-knight-950 font-bold py-4 rounded-xl shadow-lg hover:opacity-95 transition text-base">Enter Knight Marketplace Catalog (KSH)</button>
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="loginPass" placeholder="Enter your password" required>
-        </div>
-        <button type="submit">Login to Account</button>
-      </form>
-      <div class="tab-switch">
-        Don't have an account? <span onclick="showRegister()">Register here</span>
-      </div>
     </div>
 
-    <!-- 3. CLIENT DASHBOARD (With Graphics & Affiliate Marketing) -->
-    <div id="dashboard-section" class="hidden">
-      <h2 id="welcomeText">Welcome!</h2>
-      
-      <div class="balance-card">
-        <div>Your Account Balance</div>
-        <div class="balance-amount" id="balanceDisplay">KES 0.00</div>
-      </div>
-
-      <!-- Money & Affiliate Marketing Graphics Banner -->
-      <div style="width:100%; height: 130px; background: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=80') center/cover; border-radius: 8px; margin-bottom: 15px;"></div>
-
-      <div class="promo-banner">
-        💸 <strong>Affiliate Supercharged:</strong> Earn massive commissions by sharing your referral link! Unlock high-paying packages below to multiply your earnings instantly.
-      </div>
-
-      <h3>Available Packages</h3>
-      <div id="packageList"></div>
-      
-      <button style="background:#dc3545; margin-top:20px;" onclick="logout()">Logout</button>
+    <!-- STEP 3: MAIN MARKETPLACE STOREFRONT -->
+    <div id="view-marketplace" class="hidden">
+        <header class="sticky top-0 z-50 bg-knight-950/90 backdrop-blur-md border-b border-knight-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-knight-gold via-knight-gold-dark to-amber-600 flex items-center justify-center text-knight-950 font-extrabold text-2xl">♞</div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-slate-200 to-knight-gold bg-clip-text text-transparent">KNIGHT</span>
+                        <span class="block text-[10px] uppercase tracking-[0.3em] text-knight-gold font-semibold" id="header-tier-label">Black Diamond Member</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="hidden sm:block text-right">
+                        <span id="nav-user-name" class="block text-xs font-bold text-white">Client</span>
+                        <span class="text-[10px] text-knight-gold font-semibold">Verified Account</span>
+                    </div>
+                    <button onclick="openCart()" class="relative p-2.5 rounded-xl bg-knight-900 border border-knight-800 text-slate-300 hover:text-white">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-knight-gold text-knight-950 text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-knight-900 via-knight-800 to-knight-900 border border-knight-800 p-8 md:p-12 shadow-2xl">
+                <div class="max-w-2xl relative z-10 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-knight-gold/10 border border-knight-gold/30 text-knight-gold text-xs font-bold uppercase tracking-widest">Active KSH Packages & Tech Catalog</div>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">Elite Laptops & Gear <br><span class="bg-gradient-to-r from-knight-gold to-amber-400 bg-clip-text text-transparent">Priced in KSH.</span></h1>
+                    <p class="text-slate-400 text-sm">Select your high-end electronics, laptops, and luxury accessories below for immediate dispatch.</p>
+                </div>
+            </div>
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </main>
     </div>
 
-  </div>
+    <!-- CART MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-knight-950/80 backdrop-blur-sm hidden flex justify-end">
+        <div class="w-full max-w-md bg-knight-900 border-l border-knight-800 h-full flex flex-col p-6 shadow-2xl">
+            <div class="flex items-center justify-between pb-6 border-b border-knight-800">
+                <h2 class="text-lg font-bold text-white flex items-center space-x-2"><i data-lucide="shopping-bag" class="w-5 h-5 text-knight-gold"></i><span>Your Cart</span></h2>
+                <button onclick="closeCart()" class="p-2 rounded-xl bg-knight-950 border border-knight-800 text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <div id="cart-items-container" class="flex-1 overflow-y-auto py-6 space-y-4"></div>
+            <div class="border-t border-knight-800 pt-6 space-y-4">
+                <div class="flex items-center justify-between text-base">
+                    <span class="text-slate-400">Subtotal:</span>
+                    <span id="cart-subtotal" class="text-white font-bold">KSH 0</span>
+                </div>
+                <button onclick="checkout()" class="w-full bg-gradient-to-r from-knight-gold to-amber-600 text-knight-950 font-bold py-3.5 rounded-xl shadow-lg hover:opacity-90 transition">Secure Package Checkout (KSH)</button>
+            </div>
+        </div>
+    </div>
 
-  <script>
-    function showLogin() {
-      document.getElementById('registration-section').classList.add('hidden');
-      document.getElementById('login-section').classList.remove('hidden');
-    }
+    <script>
+        lucide.createIcons();
+        let currentUser = { name: "", email: "", tier: "Black Diamond VIP" };
+        let cart = [];
+        const products = [
+            { id: 1, name: "Knight Titan X1 Pro Laptop", category: "laptops", price: 455000, rating: 4.9, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80", badge: "Flagship", specs: "Intel i9 14th Gen • 64GB RAM • 2TB NVMe" },
+            { id: 2, name: "Aura Supreme ANC Headphones", category: "electronics", price: 89900, rating: 4.8, image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80", badge: "Audio Master", specs: "Bespoke Acoustic Drivers • Titanium Build" },
+            { id: 3, name: "Sovereign 18K Gold Chrono Watch", category: "accessories", price: 675000, rating: 5.0, image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", badge: "Limited Edition", specs: "Swiss Automatic • 18K Yellow Gold" },
+            { id: 4, name: "Titanium Neural Tablet Ultra", category: "laptops", price: 245000, rating: 4.7, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80", badge: "New Release", specs: "M3 Ultra Chip • Liquid Retina XDR" },
+            { id: 5, name: "Knight Carbon Fiber Briefcase", category: "accessories", price: 162000, rating: 4.9, image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=800&q=80", badge: "Executive", specs: "Aerospace Carbon Fiber • Biometric Lock" },
+            { id: 6, name: "Apex Quantum Creator Studio Laptop", category: "laptops", price: 580000, rating: 4.9, image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80", badge: "Pro Studio", specs: "AMD Ryzen 9 • RTX 4090 • 128GB RAM" }
+        ];
 
-    function showRegister() {
-      document.getElementById('login-section').classList.add('hidden');
-      document.getElementById('registration-section').classList.remove('hidden');
-    }
+        function handleRegistration(e) {
+            e.preventDefault();
+            currentUser.name = document.getElementById('reg-name').value;
+            currentUser.email = document.getElementById('reg-email').value;
+            document.getElementById('view-register').classList.add('hidden');
+            document.getElementById('view-onboarding').classList.remove('hidden');
+            document.getElementById('welcome-username').textContent = currentUser.name;
+            lucide.createIcons();
+        }
 
-    async function handleRegister(e) {
-      e.preventDefault();
-      const fullName = document.getElementById('regName').value;
-      const email = document.getElementById('regEmail').value;
-      const phone = document.getElementById('regPhone').value;
-      const password = document.getElementById('regPass').value;
+        function selectTier(tierName) {
+            currentUser.tier = tierName;
+            document.querySelectorAll('.tier-card').forEach(card => {
+                card.classList.remove('border-2', 'border-knight-gold', 'shadow-lg', 'shadow-knight-gold/10');
+                card.classList.add('border', 'border-knight-800');
+            });
+            event.currentTarget.classList.remove('border-knight-800');
+            event.currentTarget.classList.add('border-2', 'border-knight-gold', 'shadow-lg', 'shadow-knight-gold/10');
+        }
 
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, phone, password })
-      });
-      
-      const data = await res.json();
-      if (res.ok) {
-        openDashboard(data.user);
-      } else {
-        alert(data.error);
-      }
-    }
+        function completeOnboarding() {
+            document.getElementById('view-onboarding').classList.add('hidden');
+            document.getElementById('view-marketplace').classList.remove('hidden');
+            document.getElementById('nav-user-name').textContent = currentUser.name;
+            document.getElementById('header-tier-label').textContent = currentUser.tier;
+            renderProducts();
+            lucide.createIcons();
+        }
 
-    async function handleLogin(e) {
-      e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPass').value;
+        function renderProducts() {
+            document.getElementById('products-grid').innerHTML = products.map(product => `
+                <div class="bg-knight-900/60 border border-knight-800 rounded-3xl overflow-hidden group hover:border-knight-gold/50 transition duration-300 flex flex-col justify-between shadow-xl">
+                    <div>
+                        <div class="relative h-60 overflow-hidden bg-knight-950">
+                            <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-knight-950/80 backdrop-blur-md border border-knight-gold/30 text-knight-gold text-xs font-bold uppercase tracking-wider">${product.badge}</span>
+                            <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs uppercase tracking-widest text-slate-400 font-semibold">${product.category}</span>
+                                <div class="flex items-center space-x-1 text-knight-gold text-xs font-bold"><i data-lucide="star" class="w-3.5 h-3.5 fill-knight-gold"></i><span>${product.rating}</span></div>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-knight-gold transition">${product.name}</h3>
+                            <p class="text-xs text-slate-400">${product.specs}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-knight-800/60 mt-4">
+                        <span class="text-lg font-extrabold text-white">KSH ${product.price.toLocaleString('en-US')}</span>
+                        <button onclick="addToCart(${product.id})" class="bg-knight-gold text-knight-950 font-bold px-4 py-2.5 rounded-xl text-xs hover:bg-amber-400 transition flex items-center space-x-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i><span>Add Package</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
 
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      
-      const data = await res.json();
-      if (res.ok) {
-        openDashboard(data.user);
-      } else {
-        alert(data.error);
-      }
-    }
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) { existing.qty += 1; } else { cart.push({ ...product, qty: 1 }); }
+            updateCartUI();
+            openCart();
+        }
 
-    function openDashboard(user) {
-      document.getElementById('registration-section').classList.add('hidden');
-      document.getElementById('login-section').classList.add('hidden');
-      document.getElementById('dashboard-section').classList.remove('hidden');
-      
-      document.getElementById('welcomeText').innerText = `Welcome, ${user.fullName}!`;
-      document.getElementById('balanceDisplay').innerText = `KES ${user.balance.toFixed(2)}`;
-      loadPackages();
-    }
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-    function logout() {
-      document.getElementById('dashboard-section').classList.add('hidden');
-      document.getElementById('registration-section').classList.remove('hidden');
-    }
+            if (totalCount > 0) { badge.textContent = totalCount; badge.classList.remove('hidden'); } else { badge.classList.add('hidden'); }
+            document.getElementById('cart-subtotal').textContent = `KSH ${subtotal.toLocaleString('en-US')}`;
 
-    async function loadPackages() {
-      const res = await fetch('/api/packages');
-      const packages = await res.json();
-      const pkgContainer = document.getElementById('packageList');
-      pkgContainer.innerHTML = '';
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-500 text-sm">Your package bag is empty.</div>`;
+                return;
+            }
 
-      packages.forEach(pkg => {
-        const div = document.createElement('div');
-        div.className = 'package-card';
-        div.innerHTML = `
-          <h4 style="margin:0 0 8px 0; color:#007bff; font-size:1.2em;">Package KES ${pkg.price}</h4>
-          <ul style="padding-left: 20px; margin: 0 0 12px 0; color:#444;">
-            <li><strong>${pkg.ratePerView}</strong></li>
-            <li><strong>Posting Schedule:</strong> ${pkg.postingDays}</li>
-            <li><strong>Payout:</strong> ${pkg.payoutCycle}</li>
-          </ul>
-          <button style="background:#28a745;" onclick="alert('Redirecting to secure payment checkout...')">Purchase Package</button>
-        `;
-        pkgContainer.appendChild(div);
-      });
-    }
-  </script>
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center justify-between bg-knight-950 p-4 rounded-2xl border border-knight-800">
+                    <div class="flex items-center space-x-3">
+                        <img src="${item.image}" class="w-12 h-12 rounded-xl object-cover" />
+                        <div>
+                            <h4 class="text-sm font-bold text-white">${item.name}</h4>
+                            <p class="text-xs text-knight-gold font-semibold">KSH ${item.price.toLocaleString()} x ${item.qty}</p>
+                        </div>
+                    </div>
+                    <button onclick="cart = cart.filter(i => i.id !== ${item.id}); updateCartUI();" class="text-slate-500 hover:text-red-400 p-2"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function openCart() { document.getElementById('cart-modal').classList.remove('hidden'); }
+        function closeCart() { document.getElementById('cart-modal').classList.add('hidden'); }
+        function checkout() {
+            if (cart.length === 0) return;
+            alert(`Order successfully initialized for ${currentUser.name} (${currentUser.tier}) via Knight Financial Gateway in KSH!`);
+            cart = [];
+            updateCartUI();
+            closeCart();
+        }
+    </script>
 </body>
 </html>
